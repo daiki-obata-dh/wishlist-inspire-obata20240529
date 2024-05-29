@@ -1,0 +1,29 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "d6789bde2e8bae1115eaeed4aefdb180"
+name = "wishlist-inspire-obata20240529"
+handle = "wishlist-inspire-obata20240529"
+application_url = "https://raised-delaware-possible-organised.trycloudflare.com"
+embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "dh-ogne.myshopify.com"
+include_config_on_deploy = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+
+[auth]
+redirect_urls = [
+  "https://raised-delaware-possible-organised.trycloudflare.com/auth/callback",
+  "https://raised-delaware-possible-organised.trycloudflare.com/auth/shopify/callback",
+  "https://raised-delaware-possible-organised.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-04"
+
+[pos]
+embedded = false
