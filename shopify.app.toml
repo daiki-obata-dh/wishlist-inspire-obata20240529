@@ -3,7 +3,7 @@
 client_id = "d6789bde2e8bae1115eaeed4aefdb180"
 name = "wishlist-inspire-obata20240529"
 handle = "wishlist-inspire-obata20240529"
-application_url = "https://raised-delaware-possible-organised.trycloudflare.com"
+application_url = "https://troops-karaoke-oracle-todd.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://raised-delaware-possible-organised.trycloudflare.com/auth/callback",
-  "https://raised-delaware-possible-organised.trycloudflare.com/auth/shopify/callback",
-  "https://raised-delaware-possible-organised.trycloudflare.com/api/auth/callback"
+  "https://troops-karaoke-oracle-todd.trycloudflare.com/auth/callback",
+  "https://troops-karaoke-oracle-todd.trycloudflare.com/auth/shopify/callback",
+  "https://troops-karaoke-oracle-todd.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
