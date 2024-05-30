@@ -1,7 +1,10 @@
-<div class="wishlist-inspire__icon">
-  <button>
+<div class="wishlist-inspire__icon" x-data="wishlist">
+  <button @click="addToWishlist()">
     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" class="bi bi-heart"
-      fill="{{ block.settings.colour }}"
+      {% comment %} fill="{{ block.settings.colour }}" {% endcomment %}
+      :fill="wishlisted ? '#000' : '#fff'"
+      stroke-width="2"
+      stroke="#000"
       viewBox="0 0 32 32"
     >
       <path
@@ -13,14 +16,26 @@
   </button>
 </div>
 
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script type="text/javascript">
+  document.addEventListener('alpine:init', (e) => {
+    Alpine.data('wishlist', () => ({
+      wishlisted: false,
 
+      addToWishlist() {
+        this.wishlisted = ! this.wishlisted
+        // TODO: send data to database
+      }
+    }))
+  })
+</script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <style>
   .wishlist-inspire__icon {
     display: inline-block;
     margin: 0;
     padding: 0;
+    max-width: 44rem;
   }
 
   .wishlist-inspire__icon button {
