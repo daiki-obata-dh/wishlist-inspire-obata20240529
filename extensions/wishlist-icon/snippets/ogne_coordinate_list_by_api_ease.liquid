@@ -1,0 +1,62 @@
+<!-- コーディネート一覧を埋め込むタグ -->
+<div id="coordinateListContainer">
+</div>
+
+<script>
+    // bootstrapのCSSを読み込む
+    document.head.innerHTML += '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">'
+
+    /**
+     * コーディネート一覧を初期化する（デバッグを簡単にするための関数化）
+     */
+    function initializeCoordinateListContainer(params) {
+        const queryParams = new URLSearchParams({
+            requestId: "81b4b2f0-1f07-11ef-9369-c5c9a4c8da2c",
+        });
+        fetch('/apps/apiease/integration/caller/call?' + queryParams)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (jsonResponse) {
+            console.log('jsonResponse', jsonResponse);
+            document.getElementById('coordinateListContainer').innerHTML = createHtml(jsonResponse);
+        });
+
+        /**
+         * APIレスポンスからHTMLを生成する
+         */
+        function createHtml(jsonResponse) {
+            let html = '';
+
+            // 開始タグ
+            html += `<div class="coordinate-list__container container">`;
+            html += `   <div class="row">`;
+
+            const coordinateList = jsonResponse.data;
+            // console.log(coordinateList)
+            coordinateList.forEach(coordinateElement => {
+                // console.log(coordinateElement)
+                html += `
+                    <div class="coordinate-list__element-contaier col-3">
+                        <div class="coordinate-list__element-title">
+                            <h3>${coordinateElement.title.rendered}</h3>
+                        </div>
+                        <div class="coordinate-list__element-slug">
+                            <span>slug: ${coordinateElement.slug}</span>
+                        </div>
+                        <img src="${coordinateElement.scms_coordinate_images[0].main_size[0]}" alt="${coordinateElement.slug}"
+                            style="width: 100%; height: auto;">
+                        >
+                    </div>
+                `;
+            });
+
+            // 閉じタグ
+            html += `</div>`;
+            return html;
+        }
+    }
+
+    // コーディネート一覧の初期化を実行します。
+    initializeCoordinateListContainer()
+</script>
