@@ -3,7 +3,7 @@
 client_id = "d6789bde2e8bae1115eaeed4aefdb180"
 name = "wishlist-inspire-obata20240529"
 handle = "wishlist-inspire-obata20240529"
-application_url = "https://card-cooper-jenny-stan.trycloudflare.com"
+application_url = "https://fall-methodology-programs-representations.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://card-cooper-jenny-stan.trycloudflare.com/auth/callback",
-  "https://card-cooper-jenny-stan.trycloudflare.com/auth/shopify/callback",
-  "https://card-cooper-jenny-stan.trycloudflare.com/api/auth/callback"
+  "https://fall-methodology-programs-representations.trycloudflare.com/auth/callback",
+  "https://fall-methodology-programs-representations.trycloudflare.com/auth/shopify/callback",
+  "https://fall-methodology-programs-representations.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
