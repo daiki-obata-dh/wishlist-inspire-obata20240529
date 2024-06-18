@@ -23,6 +23,9 @@ import { cors } from "remix-utils/cors"
 export async function loader() {
   const settings = db.settings.findFirst()
   return json({
+    name: 'バックエンドに到達',
+  });
+  return json({
     name: settings.name,
     description: settings.description,
   });
