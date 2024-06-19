@@ -32,9 +32,12 @@ export async function loader() {
 }
 
 export async function action({ request }) {
+  console.log("request", request);
+
   const method = request.method;
   let data = await request.formData();
   data = Object.fromEntries(data);
+  console.log("request.formData", data);
 
   const customerId = data.customerId;
   const productId = data.productId || null;

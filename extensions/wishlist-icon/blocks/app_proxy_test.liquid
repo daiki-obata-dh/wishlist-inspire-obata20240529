@@ -3,10 +3,10 @@
 <script type="text/javascript">
   function appProxyTest() {
 
-  const formdata = new FormData();
-  formdata.append("customerId", 123);
+    const formdata = new FormData();
+    formdata.append("customerId", 123);
 
-  const requestOptions = {
+    const requestOptions = {
       // ---- GET用
       // method: 'GET',
 
@@ -16,7 +16,9 @@
       redirect: 'follow'
     };
     console.log('Fetch_to_proxy');
-    fetch(`apps/wishlist`, requestOptions)
+    const appProxyPath = "apps/wishlist";
+    const apiEndpooint = "api/wishlist";
+    fetch(`${appProxyPath}/${apiEndpooint}`, requestOptions)
       .then(response => response.text())
       .then(result => {
         console.log(result);
