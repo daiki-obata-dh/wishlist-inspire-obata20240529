@@ -8,7 +8,7 @@ import { OgneCoordinateListParameters } from "./parameters/ogne-coordinate-list-
 /**
  * ブラウザからバックエンド（このWebアプリ）に送信されるパラメータを、OGNE APIのリクエストパラメータに変換するクラス
  */
-class OgneApiParameterConverter {
+class OgneApiParameterParser {
 
     /**
      * コーディネート情報取得API（一覧取得用途）のリクエストパラメータに変換する
@@ -16,7 +16,7 @@ class OgneApiParameterConverter {
      * @param requestBody {Object} ブラウザから送信されたリクエストボディ
      * @returns {OgneCoordinateListParameters} OGNE APIのリクエストパラメータ
      */
-    static convertToCoordinateListParameters(requestBody: Object): OgneCoordinateListParameters {
+    static toCoordinateListParameters(requestBody: Object): OgneCoordinateListParameters {
         return new OgneCoordinateListParameters(requestBody)
     }
 }

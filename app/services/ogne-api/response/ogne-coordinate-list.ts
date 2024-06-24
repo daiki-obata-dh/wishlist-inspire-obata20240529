@@ -14,6 +14,8 @@ export class OgneCoordinateList extends OgneApiBaseResponse {
     public totalPageCount: number;
 
     public elements: Array<OgneCoordinateElement>;
+    public headElement: OgneCoordinateElement | null = null;
+
 
     constructor(wrappedApiResponse: WrappedOgneApiResponse) {
         super(wrappedApiResponse);
@@ -22,23 +24,23 @@ export class OgneCoordinateList extends OgneApiBaseResponse {
             throw new Error("The argument must be an array.");
         }
 
-        this.elements = this.buildElements(this.apiResponseJsonObject);
+        this.elements = this.convertElements(this.apiResponseJsonObject);
 
-        let totalArticleCount = 0;
-        let totalPageCount = 0;
-        if (this.elements.length > 0) {
-            const headCoordinateElement = this.elements[0];
-            totalArticleCount = headCoordinateElement.totalArticleCount;
-            totalPageCount = headCoordinateElement.totalPageCount;
-        }
-        this.totalArticleCount = totalArticleCount;
-        this.totalPageCount = totalPageCount;
+        this.headElement = (this.elements.length > 0) ? this.elements[0] : null;
+        this.totalArticleCount = this.headElement?.totalArticleCount || 0;
+        this.totalPageCount = this.headElement?.totalPageCount || 0;
 
         Object.freeze(this);
     }
 
-    protected buildElements(coordinateInfoElements: Array<Record<string, any>>): Array<OgneCoordinateElement> {
-        const elements = coordinateInfoElements.map((coordinateElement) => {
+    /**
+     * OGNEのAPIレスポンスを、このアプリ用のコーディネート情報一覧データに変換します。
+     *
+     * @param ogne_api_coordinate_info OGNE APIのコーディネート情報一覧データ
+     * @returns {Array<OgneCoordinateElement>} コーディネート情報一覧データ
+     */
+    protected convertElements(ogne_api_coordinate_info: Array<Record<string, any>>): Array<OgneCoordinateElement> {
+        const elements = ogne_api_coordinate_info.map((coordinateElement) => {
             return new OgneCoordinateElement(coordinateElement);
         });
 
