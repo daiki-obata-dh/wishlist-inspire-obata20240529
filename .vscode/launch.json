@@ -1,0 +1,36 @@
+{
+    // IntelliSense を使用して利用可能な属性を学べます。
+    // 既存の属性の説明をホバーして表示します。
+    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // "cwd": "${workspaceFolder}/extensions/wishlist-icon",
+            "cwd": "${workspaceFolder}/",
+            "command": "npm run dev",
+            "name": "Run npm run dev",
+            "request": "launch",
+            "type": "node-terminal"
+            // "type": "node",
+            // "request": "launch",
+            // "name": "プログラムの起動",
+            // "skipFiles": [
+            //     "<node_internals>/**"
+            // ],
+            // // "program": "${workspaceFolder}/extensions/theme-extension/frontend/components/App.tsx",
+            // "program": "cd ${workspaceFolder}/extensions/theme-extension && npm run dev",
+            // "outFiles": [
+            //     "${workspaceFolder}/**/*.js"
+            // ]
+        },
+        {
+            "name": "Attach by Process ID",
+            "processId": "${command:PickProcess}",
+            "request": "attach",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        }
+    ]
+}
