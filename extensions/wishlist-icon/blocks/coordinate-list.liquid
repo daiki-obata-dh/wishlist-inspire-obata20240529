@@ -1,0 +1,39 @@
+<div id="ogne-app-coordinate-list__section">
+  <div id="ogne-app-coordinate-list__content-container">
+    {% comment %} アプリバックエンドから取得されたHTMLが挿入されます。 {% endcomment %}
+  </div>
+  <script
+    type="text/javascript"
+    src="{{ 'content-loader.js' |  asset_url }}"
+    defer
+    onload="loadCurrentPageContent('ogne-app-coordinate-list__content-container')"
+  >
+  </script>
+</div>
+
+{% schema %}
+{
+  "name": "Coordinate List",
+  "target": "section",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "product",
+      "autofill": true
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Add to Wishlist"
+    },
+    {
+      "type": "color",
+      "id": "colour",
+      "label": "Icon Colour",
+      "default": "#ff0000"
+    }
+  ]
+}
+{% endschema %}
