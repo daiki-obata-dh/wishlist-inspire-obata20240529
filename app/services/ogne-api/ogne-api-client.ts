@@ -5,6 +5,7 @@
 import { OgneApiSettings } from "./ogne-api-settings";
 import { OgneCoordinateList } from "./response/ogne-coordinate-list";
 import { OgneCoordinateListParameters } from "./parameters/ogne-coordinate-list-parameters";
+import { OgneCoordinateDetailParameters } from "./parameters/ogne-coordinate-detail-parameters";
 import { OgneApiBaseParameters } from "./parameters/ogne-api-base-parameters";
 import { OgneApiBaseResponse, WrappedOgneApiResponse } from "./response/ogne-api-base-response";
 
@@ -22,7 +23,7 @@ type RequestCredentials = {
 
 
 export class OgneApiClient {
-    static async getCoordinateList(parameters: OgneCoordinateListParameters): Promise<OgneCoordinateInfo> {
+    async getCoordinateList(parameters: OgneCoordinateListParameters | OgneCoordinateDetailParameters): Promise<OgneCoordinateList> {
         const response = await this.request(OgneApiSettings.getCoordinateUrl(), "GET", parameters);
         return new OgneCoordinateList(response)
         /*  => レスポンスの例
@@ -156,7 +157,7 @@ export class OgneApiClient {
         */
     }
 
-    protected static async request(path: string, method: string, parameters: OgneApiBaseParameters): Promise<WrappedOgneApiResponse> {
+    protected async request(path: string, method: string, parameters: OgneApiBaseParameters): Promise<WrappedOgneApiResponse> {
         const requestOptions = this.buildRequestOption(path, method, parameters);
 
         const response = await fetch(requestOptions.url, {
@@ -171,7 +172,7 @@ export class OgneApiClient {
         return wrappedOgneApiResponse
     }
 
-    protected static buildRequestOption(
+    protected buildRequestOption(
         path: string,
         method: string,
         parameters: OgneApiBaseParameters,
@@ -190,7 +191,7 @@ export class OgneApiClient {
         throw new Error("Unsupported method.");
     }
 
-    protected static buildCredentials(): RequestCredentials {
+    protected buildCredentials(): RequestCredentials {
         return {
             headers: {
                 "Cookie": `sessionid=${OgneApiSettings.SESSION_ID}`,

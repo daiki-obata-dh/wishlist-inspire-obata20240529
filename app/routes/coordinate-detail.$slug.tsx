@@ -18,8 +18,12 @@ curl -X POST --location "${api_base_url}/api/wishlist" \
 import { json, ActionFunctionArgs } from "@remix-run/node";
 import db from "../db.server";
 import { OgneApiClient } from "app/services/ogne-api/ogne-api-client";
-import { OgneCoordinateListParameters } from "app/services/ogne-api/parameters/ogne-coordinate-list-parameters";
+import { OgneCoordinateList } from "app/services/ogne-api/response/ogne-coordinate-list";
+import { OgneCoordinateDetailParameters } from "app/services/ogne-api/parameters/ogne-coordinate-detail-parameters";
 import { cors } from "remix-utils/cors"
+import CoordinateList from "app/components/CoordinateList"
+import { useActionData } from '@remix-run/react';
+
 
 
 export async function loader() {
@@ -43,21 +47,46 @@ export const action = async ({
   if (method !== "POST") {
     return requestBody({ error: "Method not allowed" }, { status: 405 });
   }
-  if (! (requestBody instanceof Object)){
-    return requestBody({ error: "Request body is empty" }, { status: 400 });
-  }
+  const coordinateDetailParameters = new OgneCoordinateDetailParameters({
+    slug: params.slug,
+  })
 
-  const jsonParameter: Record<string, any> = requestBody
-  const coordinateListParameters = new OgneCoordinateListParameters(jsonParameter)
-  const coordinateList = await OgneApiClient.getCoordinateList(coordinateListParameters);
+  const ogneApiClient = new OgneApiClient();
+  const coordinateList = await ogneApiClient.getCoordinateList(coordinateDetailParameters);
 
   const responseBody = {
-    message: "this_is_coordinate_list",
+    message: "this_is_coordinate_detail",
     pathParams: params,
     requestBody: requestBody,
   }
   const response = new Response(
     JSON.stringify(responseBody)
   );
-  return response
+  return {
+    coordinateList: coordinateList,
+  }
 }
+
+const CoordinateDetailContent = () => {
+  const actionData = useActionData<{ coordinateList: OgneCoordinateList }>();
+
+  const coordinate = actionData.coordinateList.headElement;
+
+  return (
+    <div>
+      {coordinate &&
+        <div>
+          <img
+            src={coordinate.mainCoordinateImage.mainSizeUrl}
+            alt={coordinate.mainCoordinateImage.alternativeText}
+          />
+          <div>
+            <h3>{coordinate.title}</h3>
+          </div>
+        </div>
+      }
+    </div>
+  );
+}
+
+export default CoordinateDetailContent

@@ -5,18 +5,18 @@ const SHOPIFY_APP_PROXY_PATH = 'apps/wishlist';
 
 // クエリパラメータの名前
 const QUERY_PARAMETER_NAMES = {
-    COORDINATE_ID: 'coordinate_id',
+    COORDINATE_SLUG: 'coordinate_slug',
 };
 
 // URLのパスパラメータのプレースホルダー
 const PATH_PARAMETER_PLACEHOLDERS = {
-    COORDINATE_ID: '__ID__',
+    COORDINATE_SLUG: '__COORDINATE_SLUG__',
 }
 
 // OGNEコーディネートバックエンドのエンドポイント
 const BACKEND_ENDPOINTS = {
-    COORDINATE_LIST: 'coordinate/',
-    COORDINATE_DETAIL: `coordinate/${PATH_PARAMETER_PLACEHOLDERS.COORDINATE_ID}`,
+    COORDINATE_LIST: 'coordinate-list/',
+    COORDINATE_DETAIL: `coordinate-detail/${PATH_PARAMETER_PLACEHOLDERS.COORDINATE_SLUG}`,
 };
 
 
@@ -113,10 +113,15 @@ function getCurrentPageRequestParameters() {
  * @returns {string} バックエンドのパス
  */
 function getBackendPath(currentPageRequestParameters) {
-    if (QUERY_PARAMETER_NAMES.COORDINATE_ID in currentPageRequestParameters) {
+    // デバッグ用
+    if ('debug_path' in currentPageRequestParameters) {
+        return currentPageRequestParameters['debug_path'];
+    }
+
+    if (QUERY_PARAMETER_NAMES.COORDINATE_SLUG in currentPageRequestParameters) {
         return BACKEND_ENDPOINTS.COORDINATE_DETAIL.replace(
-            PATH_PARAMETER_PLACEHOLDERS.COORDINATE_ID,
-            currentPageRequestParameters[QUERY_PARAMETER_NAMES.COORDINATE_ID]
+            PATH_PARAMETER_PLACEHOLDERS.COORDINATE_SLUG,
+            currentPageRequestParameters[QUERY_PARAMETER_NAMES.COORDINATE_SLUG]
         );
     }
 

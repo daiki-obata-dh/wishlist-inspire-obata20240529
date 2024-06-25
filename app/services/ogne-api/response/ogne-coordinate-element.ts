@@ -5,8 +5,8 @@
 import { OgneApiBaseResponse } from "./ogne-api-base-response";
 
 type CoordinateImage = {
-    mainSize: string;
-    thumbnail: string;
+    mainSizeUrl: string;
+    thumbnailUrl: string;
     alternativeText: string;
 }
 
@@ -22,8 +22,8 @@ export class OgneCoordinateElement {
     public slug: string;
     public title: string;
     public description: string;
-    public mainCoordinateImageUrl: CoordinateImage;
-    public coordinateImageUrls: Array<CoordinateImage>;
+    public mainCoordinateImage: CoordinateImage;
+    public coordinateImages: Array<CoordinateImage>;
 
     /**
      *
@@ -38,10 +38,10 @@ export class OgneCoordinateElement {
         this.title = coordinateElementJsonObj?.title?.rendered || "";
         this.description = coordinateElementJsonObj?.content?.rendered || "";
 
-        this.coordinateImageUrls = this.buildCoordinateImageUrls(coordinateElementJsonObj?.scms_coordinate_images || []);
-        this.mainCoordinateImageUrl = (this.coordinateImageUrls.length > 0) ? this.coordinateImageUrls[0] : {
-            mainSize: "",
-            thumbnail: "",
+        this.coordinateImages = this.buildCoordinateImageUrls(coordinateElementJsonObj?.scms_coordinate_images || []);
+        this.mainCoordinateImage = (this.coordinateImages.length > 0) ? this.coordinateImages[0] : {
+            mainSizeUrl: "",
+            thumbnailUrl: "",
             alternativeText: "",
         };
 
@@ -59,9 +59,9 @@ export class OgneCoordinateElement {
     }
 
     protected buildCoordinateImageUrl(scms_coordinate_image: Record<string, any>): CoordinateImage {
-        const coordinateImage = {
-            mainSize: scms_coordinate_image?.main_size || "",
-            thumbnail: scms_coordinate_image?.thumbnail || "",
+        const coordinateImage: CoordinateImage = {
+            mainSizeUrl: scms_coordinate_image?.main_size?.[0] || "",
+            thumbnailUrl: scms_coordinate_image?.thumbnail || "",
             alternativeText: scms_coordinate_image?.alt || "",
         };
 
