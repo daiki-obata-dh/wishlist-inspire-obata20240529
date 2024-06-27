@@ -10,8 +10,7 @@ signature=xxx は、認証に必要そう。
 '''bash
 request Request {
 method: 'POST',
-url: 'https://dh-ogne.myshopify.com/api/wishlist?shop=dh-ogne.myshopify.com&logged_in_customer_id=&path_prefix=%2Fapps%2Fwishlist&timestamp=1718699872&signature=134ada6818acbb0001c1a031142a29e74
-                        7d41489b642b8b83de789a2b402ccb5',
+url: 'https://dh-ogne.myshopify.com/api/wishlist?shop=dh-ogne.myshopify.com&logged_in_customer_id=&path_prefix=%2Fapps%2Fwishlist&timestamp=1718699872&signature=134ada6818acbb0001c1a031142a29e747d41489b642b8b83de789a2b402ccb5',
 headers: Headers {
   accept: '*/*',
   'accept-encoding': 'gzip',
