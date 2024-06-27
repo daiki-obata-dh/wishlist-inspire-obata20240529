@@ -1,4 +1,4 @@
-<div id="ogne-app-coordinate-list__section">
+<div id="ogne-app-coordinate-list__section" class="coordinate-list__liquid">
   <div id="ogne-app-coordinate-list__content-container">
     {% comment %} アプリバックエンドから取得されたHTMLが挿入されます。 {% endcomment %}
   </div>
@@ -9,6 +9,7 @@
     onload="loadCurrentPageContent('ogne-app-coordinate-list__content-container')"
   >
   </script>
+  <link rel="stylesheet" href="{{ 'output.css' |  asset_url }}">
 </div>
 
 {% schema %}
