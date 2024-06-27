@@ -1,0 +1,26 @@
+FROM node:18-alpine
+
+# 公開ポートを設定する => compose.ymlで設定しているので、不要かも
+EXPOSE 3000
+
+WORKDIR /app
+COPY . .
+
+ENV NODE_ENV=local
+
+RUN npm install --omit=dev
+RUN npm install -g @shopify/cli@latest
+
+# Remove CLI packages since we don't need them in production by default.
+# Remove this line if you want to run CLI commands in your container.
+# RUN npm remove @shopify/app @shopify/cli
+#   => shopify CLIは、開発環境では必要なので、消さない
+
+RUN npm run build
+
+# You'll probably want to remove this in production, it's here to make it easier to test things!
+# RUN rm -f prisma/dev.sqlite
+#   => prismaも、開発環境では必要なので、消さない
+
+# このファイルは動かない。ここでコケる。
+CMD ["npm", "run", "dev"]
