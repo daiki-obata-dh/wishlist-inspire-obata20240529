@@ -21,28 +21,6 @@ const BACKEND_ENDPOINTS = {
 
 
 /**
- * aタグのリンククリックをトリガーに、画面を更新します。
- *
- * @param {Event} event
- * @returns {void}
- */
-function loadHrefContentOnLinkClick(event) {
-    event.preventDefault();
-
-    if (!(event.target instanceof HTMLAnchorElement)) {
-        return;
-    }
-    if (!(event.target.href)) {
-        return;
-    }
-
-    const anchorElement = event.target;
-    history.pushState(null, '', anchorElement.href);
-
-    loadCurrentPageContent();
-}
-
-/**
  * 画面の表示内容を、現在のアドレスバーのURLにふさわしい内容に更新します。
  *
  * @param {string} htmlContentContainerId 表示内容を反映するHTML要素のID
@@ -73,7 +51,14 @@ function loadCurrentPageContent(htmlContentContainerId) {
     .then(response => response.text())
     .then(result => {
         console.log(result);
-        htmlContentContainer.innerHTML = result;
+        if (htmlContentContainer.contentDocument) {
+            // htmlContentContainer が iframe の場合はこちら
+            htmlContentContainer.contentDocument.open();
+            htmlContentContainer.contentDocument.write(result);
+            htmlContentContainer.contentDocument.close();
+        } else {
+            htmlContentContainer.innerHTML = result;
+        }
     })
     .catch(error => console.log('error', error));
 };

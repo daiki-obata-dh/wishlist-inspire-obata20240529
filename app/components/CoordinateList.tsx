@@ -15,8 +15,8 @@ function CoordinateList(data: CoordinateListArgs) {
 
     return (
         <div className="grid grid-cols-4 gap-4">
-            <div className="coordinate-list__element">
-                {coordinateElements.map((element) => (
+            {coordinateElements.map((element) => (
+                <div className="coordinate-list__element">
                     <CoordinateCard
                         key={element.id}
                         slug={element.slug}
@@ -24,8 +24,8 @@ function CoordinateList(data: CoordinateListArgs) {
                         imageUrl={element.mainCoordinateImage.mainSizeUrl}
                         alternateText={element.title}
                     />
-                ))}
-            </div>
+                </div>
+            ))}
         </div>
     )
 }

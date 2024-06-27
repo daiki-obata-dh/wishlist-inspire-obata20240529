@@ -1,19 +1,19 @@
-<div id="ogne-shopify-app__section">
-  <div id="ogne-shopify-app__content-container">
+<div id="ogne-app-coordinate-list__section" class="ogne-shopify-app__liquid">
+  <iframe src="" frameborder="0" id="ogne-app-coordinate-list__content-container">
     {% comment %} アプリバックエンドから取得されたHTMLが挿入されます。 {% endcomment %}
-  </div>
+  </iframe>
   <script
     type="text/javascript"
     src="{{ 'content-loader.js' |  asset_url }}"
     defer
-    onload="loadCurrentPageContent('ogne-shopify-app__content-container')"
+    onload="loadCurrentPageContent('ogne-app-coordinate-list__content-container')"
   >
   </script>
 </div>
 
 {% schema %}
 {
-  "name": "Coordinate List",
+  "name": "Ogne Shpiry App",
   "target": "section",
   "settings": [
     {
